@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OnionTree Sentinel</title>
+    <link rel="stylesheet" type="text/css" href="../css/default.css">
+    <style>
+        .status_beam {
+            border-radius:2px;
+            margin-bottom:0.10em;
+            margin-right:0.25em;
+            width:6px;
+            height:6px;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -o-user-select: none;
+            user-select: none;
+        }
+        .text-ellipsis {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body class="popup">
+    <div class="panel">
+        <div class="panel-section panel-section-header">
+            <div class="text-section-header">
+                {{ name }}
+            </div>
+        </div>
+        <div class="panel-section panel-section-list">
+            <div class="panel-list-item disabled">
+                <div class="text">Other Mirrors</div>
+            </div>
+
+            {{ #urls }}
+            <div class="panel-list-item">
+                <div class="icon">
+                    <img class="status_beam" src="http://qf6ycc37agiwvunc757l4427guhdawqngjqs4bfn3kenwszpjnk53sqd.onion/png/{{#urlencode}}{{{ . }}}{{/urlencode}}" alt="&bullet;">
+                </div>
+                <div class="text text-ellipsis">
+                    <a href="{{ . }}">{{ . }}</a>
+                </div>
+            </div>
+            {{ /urls }}
+            {{ ^urls }}
+            <div class="panel-list-item disabled">
+                <div class="text"><small>No other mirrors.</small></div>
+            </div>
+            {{ /urls }}
+        </div>
+        <div class="panel-section panel-section-footer">
+            <div id="about" class="panel-section-footer-button">About</div>
+            <div class="panel-section-footer-separator"></div>
+        </div>
+    </div>
+
+    <script src="../js/service.js"></script>
+    <script src="../vendor/mustache.js"></script>
+    <script src="../js/service_page.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+
+  "description": "OnionTree Sentinel protects you from phishing .onion sites by querying a database of trusted sites. Without making external connections, everything is stored locally.",
+  "manifest_version": 2,
+  "name": "OnionTree Sentinel",
+  "version": "1.0",
+  "homepage_url": "https://github.com/oniontree-org/oniontree-sentinel",
+  "icons": {
+    "48": "icons/logo.png"
+  },
+  "background": {
+    "scripts": ["js/service.js", "js/address.js", "js/verify.js"]
+  },
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": {
+      "16": "icons/bird_neutral_16px.png",
+      "32": "icons/bird_neutral_32px.png"
+    },
+    "default_popup": "popup/about.html"
+  },
+  "permissions": ["tabs"]
+}

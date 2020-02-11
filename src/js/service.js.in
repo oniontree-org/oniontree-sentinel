@@ -1,0 +1,8 @@
+class Service {
+    constructor() {
+        this._services = {{ .Unsorted | json }};
+    }
+    get services() {
+        return this._services;
+    }
+}
