@@ -13,6 +13,7 @@ src/vendor:
 clean:
 	$(MAKE) -C src/js/ $@
 	$(MAKE) -C src/vendor/ $@
+	$(RM) *.zip
 
 .PHONY: archive
 archive:
