@@ -1,6 +1,6 @@
 {
 
-  "description": "OnionTree Sentinel protects you from phishing .onion sites by querying a database of trusted sites. Without making external connections, everything is stored locally.",
+  "description": "OnionTree Sentinel is a privacy oriented, anti-phishing add-on for Tor Browser that protects you from bad .onion sites.",
   "manifest_version": 2,
   "name": "OnionTree Sentinel",
   "version": "1.0",
