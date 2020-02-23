@@ -1,7 +1,7 @@
 import {PageBase} from "./base.js";
 import {SourceManager} from "../source_manager.js";
 
-class PageService extends PageBase {
+class Page extends PageBase {
     constructor(serviceID, url) {
         super();
         this.serviceID = serviceID;
@@ -27,10 +27,10 @@ class PageService extends PageBase {
     }
 }
 
-new PageService(new URL(window.location.href).searchParams.get("id"),
+new Page(new URL(window.location.href).searchParams.get("id"),
     new URL(window.location.href).searchParams.get("url"))
     .render().then(function(){
-    PageService.setButtonAction("about", function(){
+    Page.setButtonAction("about", function(){
         let id = new URL(window.location.href).searchParams.get("id");
         window.open("http://onions53ehmf4q75.onion/services/" + id + ".html", '_blank').focus();
     });
