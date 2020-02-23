@@ -37,6 +37,22 @@ export class SourceManager {
         return result;
     }
 
+    searchServiceID(query) {
+        let result = undefined;
+        for ( let id in this.sources ) {
+            if ( query["address"] !== undefined ){
+                result = this.sources[id].getIDByAddress(query["address"]);
+            } else {
+                // No query specified
+                break;
+            }
+            if ( result !== undefined ) {
+                break;
+            }
+        }
+        return result;
+    }
+
     updateSource(id) {
         let my = this;
         return new Promise(function(resolve, reject){

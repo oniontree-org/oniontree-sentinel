@@ -29,6 +29,10 @@ export class Source {
         });
     }
 
+    getIDByAddress(address) {
+        return this.data["addresses"][address];
+    }
+
     getByAddress(address) {
         return this.getByID(this.data["addresses"][address]);
     }
