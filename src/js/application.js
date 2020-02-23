@@ -1,5 +1,6 @@
 import {OriginOnion} from "./origin/onion.js";
 import {SourceManager} from "./source/manager.js";
+import {OriginTor2Web} from "./origin/tor2web.js";
 
 const DefaultSources = [
     "https://raw.githubusercontent.com/oniontree-org/dist/master/public/oniontree/all.json"
@@ -11,6 +12,7 @@ class Application {
         // Register handler for origin matching a certain pattern.
         this.originActions = [
             new OriginOnion(),
+            new OriginTor2Web(),
         ];
         this.sourceManager = initSourceManager();
 

@@ -54,3 +54,10 @@ export const AboutPopup = {
     "file": "popup/about.html",
     "data": {}
 };
+
+export const Tor2WebPopup = {
+    "title": "CAUTION: Using Tor2Web Proxy!",
+    "icon": getIcon("bird_dead"),
+    "file": "popup/tor2web.html",
+    "data": {}
+};
