@@ -1,5 +1,5 @@
 import {OriginOnion} from "./origin/onion.js";
-import {SourceManager} from "./source_manager.js";
+import {SourceManager} from "./source/manager.js";
 
 const DefaultSources = [
     "https://raw.githubusercontent.com/oniontree-org/dist/master/public/oniontree/all.json"
