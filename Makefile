@@ -1,9 +1,5 @@
 .PHONY: all
-all: src/js src/vendor
-
-.PHONY: src/js
-src/js:
-	$(MAKE) -C src/js/
+all: src/vendor
 
 .PHONY: src/vendor
 src/vendor:
@@ -11,7 +7,6 @@ src/vendor:
 
 .PHONY: clean
 clean:
-	$(MAKE) -C src/js/ $@
 	$(MAKE) -C src/vendor/ $@
 	$(RM) *.zip
 
