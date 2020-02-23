@@ -1,4 +1,4 @@
-import {Popup, ServiceURLPopup} from "../popup.js";
+import {Popup, ServiceURLPopup, UnsafeURLPopup} from "../popup.js";
 import {OriginBase} from "./base.js";
 
 export class OriginOnion extends OriginBase {
@@ -14,8 +14,7 @@ export class OriginOnion extends OriginBase {
                 "address": origin
             });
             if ( serviceID === undefined ) {
-                // TODO!!
-                //Popup.set(tabInfo, ServiceURLPopup, {"url": origin});
+                Popup.set(tabInfo, UnsafeURLPopup, {"url": origin});
             } else {
                 Popup.set(tabInfo, ServiceURLPopup, {"id": serviceID, "url": origin});
             }
