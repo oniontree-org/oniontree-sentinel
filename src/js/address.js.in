@@ -1,8 +1,0 @@
-class Address {
-    constructor() {
-        this._addresses = {{ .Addresses | json }};
-    }
-    get addresses() {
-        return this._addresses;
-    }
-}
