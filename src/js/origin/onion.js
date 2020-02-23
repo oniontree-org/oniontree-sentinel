@@ -3,7 +3,7 @@ import {OriginBase} from "./base.js";
 
 export class OriginOnion extends OriginBase {
     constructor() {
-        super(".*\.onion$");
+        super(".*\\.onion$");
     }
 
     eventOnTabUpdated() {
