@@ -1,5 +1,5 @@
 import {PageBase} from "./base.js";
-import {SourceManager} from "../source_manager.js";
+import {SourceManager} from "../source/manager.js";
 
 class Page extends PageBase {
     constructor(serviceID, url) {

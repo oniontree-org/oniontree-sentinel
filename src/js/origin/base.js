@@ -1,5 +1,5 @@
 import {Popup, ServiceURLPopup} from "../popup.js";
-import {SourceManager} from "../source_manager.js";
+import {SourceManager} from "../source/manager.js";
 
 export class OriginBase {
     constructor(regexp) {
