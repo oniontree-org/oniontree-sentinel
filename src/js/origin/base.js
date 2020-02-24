@@ -1,10 +1,9 @@
-import {Popup, ServiceURLPopup} from "../popup.js";
 import {SourceManager} from "../source/manager.js";
 
 export class OriginBase {
     constructor(regexp) {
         this.regexp = new RegExp(regexp);
-        this.sourceManager = new SourceManager();
+        this.sourceManager = new SourceManager("SM_OriginBase");
         this.sourceManager.enableReloadOnCommit();
         this.sourceManager.loadFromStorage().catch(function(err){
             console.error(err);
