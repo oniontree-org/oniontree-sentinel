@@ -1,25 +1,30 @@
 import {Source} from "./source.js";
 
 export class SourceManager {
-    constructor() {
+    constructor(name) {
+        this.name = name;
         this.sources = {};
         this.autoUpdateSlots = {};
         this.storageKey = "source_manager";
     }
 
     addSource(id) {
+        this.log("addSource", id);
         this.sources[id] = new Source(id);
     }
 
     getSource(id) {
+        this.log("getSource", id);
         return this.sources[id];
     }
 
     listSources() {
+        this.log("listSources");
         return Object.keys(this.sources);
     }
 
     searchService(query) {
+        this.log("searchService", query);
         let result = undefined;
         for ( let id in this.sources ) {
             if ( query["address"] !== undefined ){
@@ -38,6 +43,7 @@ export class SourceManager {
     }
 
     searchServiceID(query) {
+        this.log("searchServiceID", query);
         let result = undefined;
         for ( let id in this.sources ) {
             if ( query["address"] !== undefined ){
@@ -54,6 +60,7 @@ export class SourceManager {
     }
 
     updateSource(id) {
+        this.log("updateSource", id);
         let my = this;
         return new Promise(function(resolve, reject){
             my.sources[id].retrieve().then(function(){
@@ -69,6 +76,7 @@ export class SourceManager {
     }
 
     commitToStorage() {
+        this.log("commitToStorage");
         let my = this;
         return new Promise(function(resolve, reject){
             let commitData = {[my.storageKey]: {}};
@@ -77,7 +85,7 @@ export class SourceManager {
                 commitData[my.storageKey][id] = my.sources[id].data;
             }
 
-            console.log("commitToStorage", commitData);
+            my.log("commitToStorage", commitData);
 
             browser.storage.local.set(commitData).then(function(){
                 resolve();
@@ -88,10 +96,11 @@ export class SourceManager {
     }
 
     loadFromStorage() {
+        this.log("loadFromStorage");
         let my = this;
         return new Promise(function(resolve, reject){
             browser.storage.local.get(my.storageKey).then(function(loadData){
-                console.log("loadFromStorage", loadData);
+                my.log("loadFromStorage", loadData);
 
                 for ( let id in loadData[my.storageKey] ) {
                     if ( my.sources[id] === undefined ){
@@ -107,33 +116,39 @@ export class SourceManager {
     }
 
     enableAutoUpdate(id, interval) {
+        this.log("enableAutoUpdate", {"id": id, "interval": interval});
         let my = this;
         this.autoUpdateSlots[id] = setInterval(async function(){
-            console.log("SourceManager", "auto-update", id);
+            my.log("auto-update", id);
             await my.updateSource(id);
         }, interval);
     }
 
     disableAutoUpdate(id) {
+        this.log("disableAutoUpdate", id);
         clearInterval(this.autoUpdateSlots[id]);
         delete this.autoUpdateSlots[id];
     }
 
     enableReloadOnCommit() {
-        console.log("enableReloadOnCommit");
+        this.log("enableReloadOnCommit");
         browser.storage.onChanged.addListener(this.eventOnCommitToStorage());
     }
 
     disableReloadOnCommit() {
-        console.log("disableReloadOnCommit");
+        this.log("disableReloadOnCommit");
         browser.storage.onChanged.removeListener(this.eventOnCommitToStorage());
     }
 
     eventOnCommitToStorage() {
         let my = this;
         return async function(changes, area){
-            console.log("eventOnCommitToStorage", my, changes, area);
+            my.log("handling onCommitToStorage");
             await my.loadFromStorage();
         };
+    }
+
+    log(message, data = "") {
+        console.log(this.name, message, data);
     }
 }
