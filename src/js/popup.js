@@ -25,39 +25,11 @@ export class Popup {
             "tabId": tabInfo.id
         })
     }
+
+    static icon(name) {
+        return {
+            "16": "icons/" + name + "_16px.png",
+            "32": "icons/" + name + "_32px.png"
+        };
+    }
 }
-
-function getIcon(name) {
-    return {
-        "16": "icons/" + name + "_16px.png",
-        "32": "icons/" + name + "_32px.png"
-    };
-}
-
-export const ServiceURLPopup = {
-    "title": "Yippee! This URL is listed in OnionTree!",
-    "icon": getIcon("bird_safe"),
-    "file": "popup/service.html",
-    "data": {}
-};
-
-export const UnsafeURLPopup = {
-    "title": "CAUTION: This URL is NOT listed in OnionTree!",
-    "icon": getIcon("bird_dead"),
-    "file": "popup/unsafe.html",
-    "data": {}
-};
-
-export const AboutPopup = {
-    "title": "",
-    "icon": getIcon("bird_neutral"),
-    "file": "popup/about.html",
-    "data": {}
-};
-
-export const Tor2WebPopup = {
-    "title": "CAUTION: Using Tor2Web Proxy!",
-    "icon": getIcon("bird_dead"),
-    "file": "popup/tor2web.html",
-    "data": {}
-};
