@@ -6,7 +6,7 @@ class Page extends PageBase {
         super();
         this.serviceID = serviceID;
         this.url = url;
-        this.sourceManager = new SourceManager();
+        this.sourceManager = new SourceManager("SM_PageService");
         this.sourceManager.enableReloadOnCommit();
     }
 

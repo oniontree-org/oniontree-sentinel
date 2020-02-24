@@ -53,7 +53,7 @@ class Application {
 }
 
 function initSourceManager() {
-    let sm = new SourceManager();
+    let sm = new SourceManager("SM_Application");
     sm.enableReloadOnCommit();
     sm.loadFromStorage().catch(function(err){
         console.error(err);
