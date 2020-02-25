@@ -1,27 +1,41 @@
 # OnionTree Sentinel
 
-A Tor Browser extension that protects you from phishing onion sites.
+![Mozilla Add-on](https://img.shields.io/amo/v/oniontree-sentinel?label=version)
+![Mozilla Add-on](https://img.shields.io/amo/dw/oniontree-sentinel)
+![Mozilla Add-on](https://img.shields.io/amo/users/oniontree-sentinel)
+![Mozilla Add-on](https://img.shields.io/amo/rating/oniontree-sentinel)
+
+A privacy oriented, anti-phishing add-on for Tor Browser that protects you from bad .onion sites.
 
 ### NOTICE
 
-This is a *proof of concept* work. The extension is fully functional
-but somewhat rough around the edges. I am looking for your feedback.
+This is an *experimental software*. The add-on is fully functional
+but somewhat rough around the edges. Feedback and code contributions are
+welcomed.
 
-**I am also looking for an individual who's willing to help with graphical side
-of things. Icons and UI. But mostly icons.** Get in touch, if you are interested.
+### Features
+
+* Protects against phishing onion sites by utilizing a whitelist of verified links.
+
+* Provides alternative mirrors, if current one does not work.
+
+* Warns when accessing an onion site using a Tor2Web proxy.
 
 ### How it works?
 
-The extension contains exported [OnionTree](https://github.com/onionltd/oniontree) data which is queried
-on each URL visit.
+The add-on imports databases of well-known, verified addresses. By default,
+the add-on imports [OnionTree](https://github.com/onionltd/oniontree).
+Every time you visit a website, website's URL is looked up in a database.
+URL lookups are done on your machine only.
+**OnionTree Sentinel never sends out addresses that you visit.**
 
-If an URL is listed in OnionTree, the canary icon
+If URL is found in a database, the canary icon
 turns green and a pop up becomes available which displays the name of the site
-and other mirrors listed in OnionTree.
+and alternative mirrors.
 
 ![Image](https://linx.li/s/listed.png)
 
-If an URL is not listed in OnionTree, the canary icon
+If URL is not found in a database, the canary icon
 turns red and a pop up becomes available, warning a user
 to be aware that this site may be a phishing site. Optionally
 a user can report the URL as a phishing site. At the moment, this works
@@ -31,51 +45,24 @@ by opening a new issue in OnionTree GitHub repository.
 
 ### Installation
 
-Wait for it to become available via Mozilla's Addons.
+The add-on is available via [Mozilla's Addons](https://addons.mozilla.org/en-US/firefox/addon/oniontree-sentinel/).
 
 ### Hacking
 
-In order to try the extension locally, first clone the OnionTree repository:
-
-```
-$ git clone https://github.com/onionltd/oniontree
-```
-
-Download and build `oniontree-generate` from [oniontree-tools](https://github.com/onionltd/oniontree-tools):
-
-```
-$ git clone https://github.com/onionltd/oniontree-tools
-$ cd oniontree-tools/cmd/oniontree-generate
-$ make
-# Copy the binary somewhere where it's accessible via PATH
-$ cp ./oniontree-generate ~/go/bin
-```
-
-Finally, clone this repository:
+In order to test the add-on locally.
 
 ```
 $ git clone https://github.com/onionltd/oniontree-sentinel
-$ cd oniontree-sentinel
-```
-
-Generate javascript files:
-
-```
-$ ONIONTREE_PATH=path/to/oniontree/dir make
 ```
 
 Open Tor Browser and navigate to `about:debugging`. Click `Load Temporary Add-on...`
-and load the extension's manifest in `src/manifest.json`.
+and load the add-on's manifest in `src/manifest.json`.
 
 ### Future works
 
 * Improve UI
 
-* Load OnionTree data from a remote source, allow users to add unofficial sources
-
-* Warn when accessing a site through Tor gateway (onion.pet, onion.ly,...).
-
-* Make the extension persistent on Tails
+* Make the add-on persistent on Tails
 
 ### Why "sentinel"?
 
