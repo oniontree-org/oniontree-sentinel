@@ -115,17 +115,19 @@ export class SourceManager {
         });
     }
 
+    // loadFromStorage loads data from browser.storage.local and replaces previous sources in class' memory.
     loadFromStorage() {
         this.log("loadFromStorage");
         let my = this;
         return new Promise(function(resolve, reject){
             browser.storage.local.get(my.storageKey).then(function(loadData){
                 my.log("loadFromStorage", loadData);
+                for ( let id in my.sources ) {
+                    my.deleteSource(id);
+                }
 
                 for ( let id in loadData[my.storageKey] ) {
-                    if ( my.sources[id] === undefined ){
-                        my.addSource(id);
-                    }
+                    my.addSource(id);
                     my.sources[id].data = loadData[my.storageKey][id];
                 }
                 resolve();
