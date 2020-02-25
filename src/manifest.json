@@ -10,6 +10,11 @@
   "background": {
     "page": "background.html"
   },
+  "options_ui": {
+    "page": "dashboard.html",
+    "open_in_tab": true,
+    "browser_style": false
+  },
   "browser_action": {
     "browser_style": true,
     "default_icon": {
