@@ -45,7 +45,11 @@ class Page extends PageBase {
 let page = new Page();
 page.render().then(function() {
     Page.setButtonAction({ "id": "add_source" }, function(){
-        let input = new InputSource(prompt("Add source https://"));
+        let sourceID = prompt("Add source https://");
+        if ( sourceID == null ) {
+            return;
+        }
+        let input = new InputSource(sourceID);
         if ( !input.validate() ) {
             alert(input.error);
         }
