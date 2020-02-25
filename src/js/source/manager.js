@@ -26,6 +26,13 @@ export class SourceManager {
         }
     }
 
+    deleteSource(id) {
+        if ( this.sources[id] !== undefined ) {
+            this.sources[id].release();
+            delete this.sources[id];
+        }
+    }
+
     getSource(id) {
         this.log("getSource", id);
         return this.sources[id];
