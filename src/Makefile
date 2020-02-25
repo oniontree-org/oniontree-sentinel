@@ -3,4 +3,12 @@ all:
 
 .PHONY: archive
 archive:
-	zip -r ../oniontree-sentinel.zip . -i *.js -i *.json -i *.html -i *.css -i *.png
+	zip \
+	    -i "vendor/*" \
+	    -i "*.js" \
+	    -i "*.json" \
+	    -i "*.html" \
+	    -i "*.css" \
+	    -i "*.png" \
+	    -x "*Makefile" \
+	    -r ../oniontree-sentinel.zip .
