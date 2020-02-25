@@ -30,7 +30,7 @@ class Page extends PageBase {
 new Page(new URL(window.location.href).searchParams.get("id"),
     new URL(window.location.href).searchParams.get("url"))
     .render().then(function(){
-    Page.setButtonAction("about", function(){
+    Page.setButtonAction({ "id": "about" }, function(){
         let id = new URL(window.location.href).searchParams.get("id");
         window.open("http://onions53ehmf4q75.onion/services/" + id + ".html", '_blank').focus();
     });

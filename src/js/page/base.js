@@ -24,7 +24,17 @@ export class PageBase {
         body.innerHTML = mustache.render(body.innerHTML, this.data);
     }
 
-    static setButtonAction(id, action) {
-        document.getElementById(id).addEventListener("click", action);
+    static setButtonAction(select, action) {
+        if ( select["id"] ) {
+            let dom = document.getElementById(select["id"]);
+            if ( dom !== undefined ) {
+                dom.addEventListener("click", action);
+            }
+        } else if ( select["class"] ) {
+            let doms = document.getElementsByClassName(select["class"]);
+            for ( let i = 0; i < doms.length; i++ ) {
+                doms[i].addEventListener("click", action);
+            }
+        }
     }
 }
