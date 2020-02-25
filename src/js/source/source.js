@@ -2,6 +2,12 @@ export class Source {
     constructor(id) {
         this.id = id;
         this.data = undefined;
+        this.timer = undefined;
+    }
+
+    // Class destructor
+    release() {
+        this.disableAutoRetrieve();
     }
 
     retrieve() {
@@ -27,6 +33,23 @@ export class Source {
                 reject("network error");
             });
         });
+    }
+
+    enableAutoRetrieve(interval) {
+        if ( this.timer !== undefined ) {
+            this.disableAutoRetrieve();
+        }
+        let my = this;
+        this.timer = setInterval(async function(){
+            await my.retrieve();
+        }, interval);
+    }
+
+    disableAutoRetrieve() {
+        if ( this.timer !== undefined ) {
+            clearInterval(this.timer);
+            this.timer = undefined;
+        }
     }
 
     getIDByAddress(address) {

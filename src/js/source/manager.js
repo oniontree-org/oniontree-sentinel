@@ -4,13 +4,26 @@ export class SourceManager {
     constructor(name) {
         this.name = name;
         this.sources = {};
-        this.autoUpdateSlots = {};
         this.storageKey = "source_manager";
+        this.autoUpdateInterval = 0;
+    }
+
+    // Class destructor
+    release() {
+        for (let id in this.sources) {
+            this.sources[id].release();
+        }
     }
 
     addSource(id) {
         this.log("addSource", id);
+        if ( this.sources[id] !== undefined ) {
+            this.sources[id].release();
+        }
         this.sources[id] = new Source(id);
+        if ( this.autoUpdateInterval > 0 ) {
+            this.sources[id].enableAutoRetrieve(this.autoUpdateInterval);
+        }
     }
 
     getSource(id) {
@@ -104,7 +117,7 @@ export class SourceManager {
 
                 for ( let id in loadData[my.storageKey] ) {
                     if ( my.sources[id] === undefined ){
-                        my.sources[id] = new Source(id);
+                        my.addSource(id);
                     }
                     my.sources[id].data = loadData[my.storageKey][id];
                 }
@@ -115,19 +128,19 @@ export class SourceManager {
         });
     }
 
-    enableAutoUpdate(id, interval) {
-        this.log("enableAutoUpdate", {"id": id, "interval": interval});
-        let my = this;
-        this.autoUpdateSlots[id] = setInterval(async function(){
-            my.log("auto-update", id);
-            await my.updateSource(id);
-        }, interval);
-    }
+    setAutoUpdate(interval) {
+        this.log("setAutoUpdate", interval);
+        this.autoUpdateInterval = interval;
 
-    disableAutoUpdate(id) {
-        this.log("disableAutoUpdate", id);
-        clearInterval(this.autoUpdateSlots[id]);
-        delete this.autoUpdateSlots[id];
+        if (this.autoUpdateInterval > 0) {
+            for (let id in this.sources) {
+                this.sources[id].enableAutoRetrieve(this.autoUpdateInterval);
+            }
+        } else {
+            for (let id in this.sources) {
+                this.sources[id].disableAutoRetrieve();
+            }
+        }
     }
 
     enableReloadOnCommit() {
