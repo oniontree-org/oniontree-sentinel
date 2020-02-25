@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OnionTree Sentinel</title>
+</head>
+<body>
+    <h1>Dashboard</h1>
+
+    <fieldset>
+        <legend>Sources</legend>
+        <button id="add_source">Add source</button>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>URL</th>
+                    <th>&ndash;</th>
+                </tr>
+            </thead>
+            <tbody id="sources_body"></tbody>
+        </table>
+    </fieldset>
+
+    <script id="template_sources_table_row" type="text/template">
+        {{ #sources }}
+        <tr>
+            <td>{{.}}</td>
+            <td>
+                <button class="delete_source" data-source-id="{{.}}">&times;</button>
+            </td>
+        </tr>
+        {{ /sources }}
+        {{ ^sources }}
+        <tr><td colspan="2">No sources</td></tr>
+        {{ /sources }}
+    </script>
+    <script type="module" src="./js/dashboard.js"></script>
+</body>
+</html>
