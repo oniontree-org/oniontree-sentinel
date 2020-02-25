@@ -55,12 +55,12 @@ class Application {
 function initSourceManager() {
     let sm = new SourceManager("SM_Application");
     sm.enableReloadOnCommit();
+    sm.setAutoUpdate(autoUpdateInterval);
     sm.loadFromStorage().then(function(){
         // Register default sources
         for ( let i in DefaultSources ) {
             sm.addSource(DefaultSources[i]);
             sm.updateSource(DefaultSources[i]);
-            sm.enableAutoUpdate(DefaultSources[i], autoUpdateInterval);
         }
     }).catch(function(err){
         console.error(err);
